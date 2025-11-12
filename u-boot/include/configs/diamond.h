@@ -90,6 +90,10 @@
 #ifndef __DIAMOND_CONFIG_H
 #define __DIAMOND_CONFIG_H
 
+#ifndef NEST_BUILD_CONFIG
+#define NEST_BUILD_CONFIG "Development"
+#endif
+
 /*
  * ARM Processor Architecture, Family and Product Configuration
  */

@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    strategy:
+      matrix:
+        include:
+          - config: j49
+          - config: diamond
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+        
+      - name: Setup toolchain
+        uses: cuckoo-nest/toolchain@main
+
+      - name: Run build script
+        run: ./build.sh "${{ matrix.config }}"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v5
+        with:
+          name: ${{ matrix.config }}
+          path: |
+            ./u-boot/u-boot*
