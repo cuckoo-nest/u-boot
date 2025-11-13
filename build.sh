@@ -16,7 +16,7 @@ fi
 
 (
     cd u-boot
-    make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- distclean
-    make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- "$CONFIG"
-    make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi-
+    make ARCH=arm "CROSS_COMPILE=$TOOLCHAIN_CROSS-" -j$(nproc) distclean
+    make ARCH=arm "CROSS_COMPILE=$TOOLCHAIN_CROSS-" -j$(nproc) "$CONFIG"
+    make ARCH=arm "CROSS_COMPILE=$TOOLCHAIN_CROSS-" -j$(nproc)
 )
